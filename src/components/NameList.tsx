@@ -24,8 +24,9 @@ const NameList: React.FC<NameListProps> = ({
                     <IonItem
                         key={`NameList_${value}_${index}`}
                         onClick={() => handleItemClick(index)}
+                        button
                     >
-                        <IonLabel>{value} - {index}</IonLabel>
+                        <IonLabel>[{index}] {value}</IonLabel>
                     </IonItem>
                 )}
             </IonList>
