@@ -1,21 +1,23 @@
 import React, { useState, useRef } from 'react'
 import { IonInput, IonButton, IonText } from '@ionic/react'
 
-type NameSetterProps = {
+export type NameSetterProps = {
     initialValue: string
     placeholder: string
     buttonTitle: string
     onNameSet?: (name: string) => void
+    withBorder?: boolean
 }
 
 const NameSetter: React.FC<NameSetterProps> = ({
-    initialValue, placeholder, buttonTitle, onNameSet
+    initialValue, placeholder, buttonTitle, onNameSet, withBorder = true
 }: NameSetterProps) => {
 
     const inputRef = useRef<HTMLIonInputElement>(null)
     const [title, setTitle] = useState(initialValue)
+
     return (
-        <div style={{ marginTop: '10px', border: 'solid 1px var(--ion-color-primary)' }}>
+        <div style={!!withBorder ? {marginTop: '10px', border: 'solid 1px var(--ion-color-primary)'}:{}}>
             <IonText color="secondary">{title}</IonText>
             <IonInput ref={inputRef} type="text" placeholder={placeholder} />
             <IonButton

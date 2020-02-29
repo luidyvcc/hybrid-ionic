@@ -1,8 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import React, { useState } from 'react';
+import React from 'react';
 import NameSetterContent from '../components/NameSetterContent';
-import NameList from '../components/NameList';
-
 
 const Home: React.FC = () => {
 

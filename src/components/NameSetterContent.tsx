@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react'
-import { IonInput, IonButton, IonText } from '@ionic/react'
+import React, { useState } from 'react'
 
 import NameList from './NameList';
 import NameSetter from './NameSetter';
@@ -26,15 +25,16 @@ const NameSetterContent: React.FC<NameSetterProps> = ({
     }
 
     return (
-        <>
+        <div style={{marginTop: '10px', border: 'solid 1px var(--ion-color-primary)'}}>
             <NameSetter
                 initialValue="Sua mãe é"
                 placeholder="Nome da sua mãe"
                 buttonTitle="Definir sua mãe"
                 onNameSet={addName}
+                withBorder={false}
             />
             <NameList names={names} onDelete={onDelete} />
-        </>
+        </div>
     );
 };
 
