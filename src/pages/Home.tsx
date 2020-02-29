@@ -1,12 +1,20 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React, { useState } from 'react';
-import NameSetter from './NameSetter';
-import NameList from './NameList';
+import NameSetter from '../components/NameSetter';
+import NameList from '../components/NameList';
 
 
 const Home: React.FC = () => {
   const [names, setNames] = useState<string[]>([])
   const addName = (name: string) => setNames([name, ...names])
+
+  const onDelete = (at: number) => {
+    const newNames = [...names];
+    if(at >= 0) {
+      newNames.splice(at, 1);
+      setNames(newNames);
+    }
+  }
 
   return (
     <IonPage>
@@ -35,7 +43,7 @@ const Home: React.FC = () => {
           onNameSet={addName}
         />
 
-        <NameList names={names}/>
+        <NameList names={names} onDelete={onDelete} />
       </IonContent>
     </IonPage>
   );
