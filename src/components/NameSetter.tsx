@@ -19,7 +19,7 @@ const NameSetter: React.FC<NameSetterProps> = ({
     return (
         <div style={!!withBorder ? {marginTop: '10px', border: 'solid 1px var(--ion-color-primary)'}:{}}>
             <IonText color="secondary">{title}</IonText>
-            <IonInput ref={inputRef} type="text" placeholder={placeholder} />
+            <IonInput ref={inputRef} value={initialValue && initialValue} type="text" placeholder={placeholder} />
             <IonButton
             onClick={_e => {
                 setTitle(inputRef.current!.value || '')

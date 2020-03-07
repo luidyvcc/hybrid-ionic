@@ -18,6 +18,8 @@ export interface AppDataAction {
         {type: 'delete', indexToDelete: number}
     ) | (
         {type: 'initialize', state: AppData}
+    ) | (
+        {type: 'update', at: number, to: string}
     )
 }
 
@@ -32,10 +34,9 @@ export const AppContextProvider: React.FC<React.PropsWithChildren<{}>> = ({
         (state: AppData, { action }: AppDataAction): AppData => {
             switch (action.type) {
                 case 'add': {
-                    console.log(state, action)
                     const newState = { ...state, names: [ action.nameToInsert, ...state.names ]}
-                    /*Storage.set({ key: 'appContext', value: JSON.stringify(newState)})
-                        .catch(() => {})*/
+                    Storage.set({ key: 'appContext', value: JSON.stringify(newState)})
+                        .catch(() => {})
                     return newState
                 }
                 case 'delete': {
@@ -48,6 +49,14 @@ export const AppContextProvider: React.FC<React.PropsWithChildren<{}>> = ({
                 }
                 case 'initialize': {
                     return action.state
+                }
+                case 'update': {
+                    const newNames = [...state.names]
+                    newNames.splice(action.at, 1, action.to)
+                    const newState = { ...state, names: newNames}
+                    Storage.set({ key: 'appContext', value: JSON.stringify(newState)})
+                        .catch(() => {})
+                    return newState
                 }
             }
         },
@@ -62,6 +71,7 @@ export const AppContextProvider: React.FC<React.PropsWithChildren<{}>> = ({
             reducer[1]({ action: {type: 'initialize', state} })
         })
         .catch(() => {})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

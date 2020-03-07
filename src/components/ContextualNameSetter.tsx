@@ -9,9 +9,11 @@ const ContextualNameSetter: React.FC<NameSetterProps> = (
     return (
         <NameSetter
             {...props}
-            onNameSet={name => despatchAppData({ action: {
-                type: 'add', nameToInsert: name
-            }})}
+            onNameSet={name => {
+                    despatchAppData({ action: { type: 'add', nameToInsert: name }})
+                    if(props.onNameSet) props.onNameSet(name)
+                }            
+            }
         />
     )
 }
